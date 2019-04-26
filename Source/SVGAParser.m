@@ -39,20 +39,35 @@ static NSOperationQueue *unzipQueue;
 
 - (void)parseWithURLRequest:(NSURLRequest *)URLRequest completionBlock:(void (^)(SVGAVideoEntity * _Nullable))completionBlock failureBlock:(void (^)(NSError * _Nullable))failureBlock {
     if ([[NSFileManager defaultManager] fileExistsAtPath:[self cacheDirectory:[self cacheKey:URLRequest.URL]]]) {
-        [self parseWithCacheKey:[self cacheKey:URLRequest.URL] completionBlock:^(SVGAVideoEntity * _Nonnull videoItem) {
-            if (completionBlock) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    completionBlock(videoItem);
-                }];
-            }
-        } failureBlock:^(NSError * _Nonnull error) {
-            [self clearCache:[self cacheKey:URLRequest.URL]];
-            if (failureBlock) {
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    failureBlock(error);
-                }];
-            }
-        }];
+//        [self parseWithCacheKey:[self cacheKey:URLRequest.URL] completionBlock:^(SVGAVideoEntity * _Nonnull videoItem) {
+//            if (completionBlock) {
+//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                    completionBlock(videoItem);
+//                }];
+//            }
+//        } failureBlock:^(NSError * _Nonnull error) {
+//            [self clearCache:[self cacheKey:URLRequest.URL]];
+//            if (failureBlock) {
+//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                    failureBlock(error);
+//                }];
+//            }
+//        }];
+        
+        //先读内存，再读硬盘
+//        SVGAVideoEntity *cacheItem = [SVGAVideoEntity readCache:[self cacheKey:URLRequest.URL]];
+//        if (cacheItem) {
+//            if (completionBlock) {
+//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                    completionBlock(cacheItem);
+//                }];
+//            }
+//            return;
+//        }
+        
+        //本地有直接播流
+        [self parseWithData:[NSData dataWithContentsOfFile:[self cacheDirectory:[self cacheKey:URLRequest.URL]]] cacheKey:[self cacheKey:URLRequest.URL] completionBlock:completionBlock failureBlock:failureBlock];
+        
         return;
     }
     [[[NSURLSession sharedSession] dataTaskWithRequest:URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
