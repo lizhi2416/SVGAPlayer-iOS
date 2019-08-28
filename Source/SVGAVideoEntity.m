@@ -34,6 +34,7 @@ static NSCache *videoCache;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         videoCache = [[NSCache alloc] init];
+        videoCache.countLimit = 1;
     });
 }
 
