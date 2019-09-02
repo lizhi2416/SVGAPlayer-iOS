@@ -55,15 +55,15 @@ static NSOperationQueue *unzipQueue;
 //        }];
         
         //先读内存，再读硬盘----修改处
-//        SVGAVideoEntity *cacheItem = [SVGAVideoEntity readCache:[self cacheKey:URLRequest.URL]];
-//        if (cacheItem) {
-//            if (completionBlock) {
-//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                    completionBlock(cacheItem);
-//                }];
-//            }
-//            return;
-//        }
+        SVGAVideoEntity *cacheItem = [SVGAVideoEntity readCache:[self cacheKey:URLRequest.URL]];
+        if (cacheItem) {
+            if (completionBlock) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    completionBlock(cacheItem);
+                }];
+            }
+            return;
+        }
         
         //本地有直接播流----修改处
         [self parseWithData:[NSData dataWithContentsOfFile:[self cacheDirectory:[self cacheKey:URLRequest.URL]]] cacheKey:[self cacheKey:URLRequest.URL] completionBlock:completionBlock failureBlock:failureBlock];
