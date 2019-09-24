@@ -24,6 +24,10 @@
 		63712E6521787950001AE014 /* heartbeat.svga in Resources */ = {isa = PBXBuildFile; fileRef = 63712E6421787950001AE014 /* heartbeat.svga */; };
 		63712E6821787A45001AE014 /* SVGAAudioEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 63712E6721787A45001AE014 /* SVGAAudioEntity.m */; };
 		63E817012178809D001D2D62 /* SVGAAudioLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E817002178809D001D2D62 /* SVGAAudioLayer.m */; };
+		71418C93225E6F710029C69E /* mutiMatte.svga in Resources */ = {isa = PBXBuildFile; fileRef = 71418C92225E6F710029C69E /* mutiMatte.svga */; };
+		71A8679122B7785100176CD6 /* matteRect.svga in Resources */ = {isa = PBXBuildFile; fileRef = 71A8679022B7785100176CD6 /* matteRect.svga */; };
+		71A8679322B7853600176CD6 /* matteBitmap.svga in Resources */ = {isa = PBXBuildFile; fileRef = 71A8679222B7853600176CD6 /* matteBitmap.svga */; };
+		71A8679B22B8CF7400176CD6 /* Goddess.svga in Resources */ = {isa = PBXBuildFile; fileRef = 71A8679A22B8CF7400176CD6 /* Goddess.svga */; };
 		80D4C7254846B96B9C6EED83 /* libPods-SVGAPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DDA5FF396660C7C932DF9B8 /* libPods-SVGAPlayer.a */; };
 		904D41F81D223DD20085A21A /* SVGABezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 904D41F71D223DD20085A21A /* SVGABezierPath.m */; };
 		9052FC631E6EB8D4007BC925 /* SVGAExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9052FC621E6EB8D4007BC925 /* SVGAExporter.m */; };
@@ -89,6 +93,10 @@
 		63712E6721787A45001AE014 /* SVGAAudioEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVGAAudioEntity.m; sourceTree = "<group>"; };
 		63E816FF2178809D001D2D62 /* SVGAAudioLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVGAAudioLayer.h; sourceTree = "<group>"; };
 		63E817002178809D001D2D62 /* SVGAAudioLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVGAAudioLayer.m; sourceTree = "<group>"; };
+		71418C92225E6F710029C69E /* mutiMatte.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = mutiMatte.svga; sourceTree = "<group>"; };
+		71A8679022B7785100176CD6 /* matteRect.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = matteRect.svga; sourceTree = "<group>"; };
+		71A8679222B7853600176CD6 /* matteBitmap.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = matteBitmap.svga; sourceTree = "<group>"; };
+		71A8679A22B8CF7400176CD6 /* Goddess.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Goddess.svga; sourceTree = "<group>"; };
 		8AD65028FA2D122A34DC4A63 /* Pods-SVGAPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SVGAPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SVGAPlayer/Pods-SVGAPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		904D41F61D223DD20085A21A /* SVGABezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGABezierPath.h; sourceTree = "<group>"; };
 		904D41F71D223DD20085A21A /* SVGABezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGABezierPath.m; sourceTree = "<group>"; };
@@ -278,6 +286,10 @@
 				344D99AC2303B67B00712349 /* answer_star2.svga */,
 				349D138D22A541C300DE6542 /* plane_new.svga */,
 				34CEF692228D4CAD0016F6C6 /* D1B203C1E14ABEDA81C62FC9BBDCE3D9.svga */,
+				71A8679A22B8CF7400176CD6 /* Goddess.svga */,
+				71A8679022B7785100176CD6 /* matteRect.svga */,
+				71A8679222B7853600176CD6 /* matteBitmap.svga */,
+				71418C92225E6F710029C69E /* mutiMatte.svga */,
 				63712E6421787950001AE014 /* heartbeat.svga */,
 				90D7CA1A1F7FB114006E74F0 /* rose_1.5.0.svga */,
 				90D7CA191F7FB114006E74F0 /* rose_2.0.0.svga */,
@@ -390,6 +402,7 @@
 				344D99B02303B67C00712349 /* answer_star.svga in Resources */,
 				34B17EE3230D2C4700FBCD13 /* PK_start1.svga in Resources */,
 				34B17EE9230E312000FBCD13 /* hehe.svga in Resources */,
+				71418C93225E6F710029C69E /* mutiMatte.svga in Resources */,
 				90A676F01D13A6DF008A69F3 /* LaunchScreen.storyboard in Resources */,
 				90A676ED1D13A6DF008A69F3 /* Assets.xcassets in Resources */,
 				34CEF693228D4CAD0016F6C6 /* D1B203C1E14ABEDA81C62FC9BBDCE3D9.svga in Resources */,
@@ -406,6 +419,11 @@
 				90D7CA1C1F7FB114006E74F0 /* rose_1.5.0.svga in Resources */,
 				90D7CA1B1F7FB114006E74F0 /* rose_2.0.0.svga in Resources */,
 				344D99B12303B67C00712349 /* answer_star2.svga in Resources */,
+				71A8679122B7785100176CD6 /* matteRect.svga in Resources */,
+				71A8679322B7853600176CD6 /* matteBitmap.svga in Resources */,
+				90D7CA1C1F7FB114006E74F0 /* rose_1.5.0.svga in Resources */,
+				90D7CA1B1F7FB114006E74F0 /* rose_2.0.0.svga in Resources */,
+				71A8679B22B8CF7400176CD6 /* Goddess.svga in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

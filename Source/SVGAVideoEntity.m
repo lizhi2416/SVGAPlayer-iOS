@@ -86,7 +86,7 @@ static NSCache *videoCache;
                     if (imageData != nil) {
                         UIImage *image = [[UIImage alloc] initWithData:imageData scale:2.0];
                         if (image != nil) {
-                            [images setObject:image forKey:key];
+                            [images setObject:image forKey:[key stringByDeletingPathExtension]];
                         }
                     }
                 }
@@ -141,7 +141,7 @@ static NSCache *videoCache;
         if (fileName != nil) {
             NSString *filePath = [self.cacheDir stringByAppendingFormat:@"/%@.png", fileName];
             if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-               filePath = [self.cacheDir stringByAppendingFormat:@"/%@", fileName];
+                filePath = [self.cacheDir stringByAppendingFormat:@"/%@", fileName];
             }
             if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
                 NSData *imageData = [NSData dataWithContentsOfFile:filePath];
@@ -155,11 +155,11 @@ static NSCache *videoCache;
         }
         else if ([protoImages[key] isKindOfClass:[NSData class]]) {
             NSData *fileTag = [protoImages[key] subdataWithRange:NSMakeRange(0, 4)];
-            if (![[fileTag description] isEqualToString:@"<89504e47>"]) {
+            NSString *fileTagDes = [fileTag description];
+            if (![fileTagDes containsString:@"89504e47"]) {
                 // mp3
                 [audiosData setObject:protoImages[key] forKey:key];
-            }
-            else {
+            } else {
                 UIImage *image = [[UIImage alloc] initWithData:protoImages[key] scale:2.0];
                 if (image != nil) {
                     [images setObject:image forKey:key];
@@ -182,7 +182,7 @@ static NSCache *videoCache;
     }];
     self.sprites = sprites;
 }
-    
+
 - (void)resetAudiosWithProtoObject:(SVGAProtoMovieEntity *)protoObject {
     NSMutableArray<SVGAAudioEntity *> *audios = [[NSMutableArray alloc] init];
     NSArray *protoAudios = [protoObject.audiosArray copy];
@@ -209,6 +209,7 @@ static NSCache *videoCache;
 
 @property (nonatomic, copy) NSString *imageKey;
 @property (nonatomic, copy) NSArray<SVGAVideoSpriteFrameEntity *> *frames;
+@property (nonatomic, copy) NSString *matteKey;
 
 @end
 

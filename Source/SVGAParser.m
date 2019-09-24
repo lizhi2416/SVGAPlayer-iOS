@@ -111,9 +111,11 @@ static NSOperationQueue *unzipQueue;
                failureBlock:failureBlock];
     }
     else {
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            failureBlock([NSError errorWithDomain:@"SVGAParser" code:404 userInfo:@{NSLocalizedDescriptionKey: @"File not exist."}]);
-        }];
+        if (failureBlock) {
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                failureBlock([NSError errorWithDomain:@"SVGAParser" code:404 userInfo:@{NSLocalizedDescriptionKey: @"File not exist."}]);
+            }];
+        }
     }
 }
 
@@ -209,7 +211,8 @@ static NSOperationQueue *unzipQueue;
         return;
     }
     NSData *tag = [data subdataWithRange:NSMakeRange(0, 4)];
-    if (![[tag description] isEqualToString:@"<504b0304>"]) {
+    NSString *fileTagDes = [tag description];
+    if (![fileTagDes containsString:@"504b0304"]) {
         // Maybe is SVGA 2.0.0
         [parseQueue addOperationWithBlock:^{
             NSData *inflateData = [self zlibInflate:data];
