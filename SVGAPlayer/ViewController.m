@@ -82,8 +82,13 @@ static SVGAParser *parser;
 //    if (self.index > pkNames.count-1) {
 //        self.index = 0;
 //    }
+//    [self.aPlayer setImageWithURL:[NSURL URLWithString:@"http://a-ssl.duitang.com/uploads/item/201601/13/20160113224704_Lt2Er.jpeg"] forKey:@"777"];
+//    [self.aPlayer setImageWithURL:[NSURL URLWithString:@"http://b-ssl.duitang.com/uploads/item/201509/04/20150904014041_Lw8Cv.jpeg"] forKey:@"999"];//17,19
+    
+    NSMutableAttributedString *mstr1 = [[NSMutableAttributedString alloc] initWithString:@"相信爱情" attributes:@{NSForegroundColorAttributeName:[UIColor orangeColor], NSFontAttributeName:[UIFont boldSystemFontOfSize:36]}];
+    [self.aPlayer setAttributedText:mstr1 forKey:@"psd_19"];
 
-    [parser parseWithNamed:@"live_pk_start" inBundle:nil completionBlock:^(SVGAVideoEntity * _Nonnull videoItem) {
+    [parser parseWithNamed:@"hunli2" inBundle:nil completionBlock:^(SVGAVideoEntity * _Nonnull videoItem) {
         if (videoItem != nil) {
             self.aPlayer.videoItem = videoItem;
             [self.aPlayer startAnimation];
