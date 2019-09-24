@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3410B8CF233A07680042ABB1 /* heheda.svga in Resources */ = {isa = PBXBuildFile; fileRef = 3410B8CE233A07680042ABB1 /* heheda.svga */; };
 		344D99AF2303B67C00712349 /* answer_pk_win.svga in Resources */ = {isa = PBXBuildFile; fileRef = 344D99AA2303B67B00712349 /* answer_pk_win.svga */; };
 		344D99B02303B67C00712349 /* answer_star.svga in Resources */ = {isa = PBXBuildFile; fileRef = 344D99AB2303B67B00712349 /* answer_star.svga */; };
 		344D99B12303B67C00712349 /* answer_star2.svga in Resources */ = {isa = PBXBuildFile; fileRef = 344D99AC2303B67B00712349 /* answer_star2.svga */; };
@@ -75,6 +76,7 @@
 /* Begin PBXFileReference section */
 		1DDA5FF396660C7C932DF9B8 /* libPods-SVGAPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SVGAPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EF4851C027B3C0E45E3C5C0 /* Pods-SVGAPlayer React.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SVGAPlayer React.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SVGAPlayer React/Pods-SVGAPlayer React.debug.xcconfig"; sourceTree = "<group>"; };
+		3410B8CE233A07680042ABB1 /* heheda.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = heheda.svga; sourceTree = "<group>"; };
 		344D99AA2303B67B00712349 /* answer_pk_win.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = answer_pk_win.svga; sourceTree = "<group>"; };
 		344D99AB2303B67B00712349 /* answer_star.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = answer_star.svga; sourceTree = "<group>"; };
 		344D99AC2303B67B00712349 /* answer_star2.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = answer_star2.svga; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 		90D7C9FA1F7E2AA3006E74F0 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				3410B8CE233A07680042ABB1 /* heheda.svga */,
 				345DB8AB2338EAE800CF8191 /* hunli1.svga */,
 				345DB8AC2338EAE800CF8191 /* hunli2.svga */,
 				345DB8A92338DB6A00CF8191 /* hunli.svga */,
@@ -423,6 +426,7 @@
 				71A8679322B7853600176CD6 /* matteBitmap.svga in Resources */,
 				90D7CA1C1F7FB114006E74F0 /* rose_1.5.0.svga in Resources */,
 				90D7CA1B1F7FB114006E74F0 /* rose_2.0.0.svga in Resources */,
+				3410B8CF233A07680042ABB1 /* heheda.svga in Resources */,
 				71A8679B22B8CF7400176CD6 /* Goddess.svga in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

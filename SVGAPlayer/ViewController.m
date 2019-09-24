@@ -28,6 +28,7 @@ static SVGAParser *parser;
     self.aPlayer.delegate = self;
     self.aPlayer.frame = CGRectMake(0, 0, 320, 320);
     self.aPlayer.loops = 0;
+    self.aPlayer.contentMode = UIViewContentModeScaleAspectFill;
     self.aPlayer.clearsAfterStop = YES;
     parser = [[SVGAParser alloc] init];
 //    [self onChange:nil];
@@ -50,21 +51,21 @@ static SVGAParser *parser;
                        @"https://github.com/yyued/SVGA-Samples/blob/master/matteRect.svga?raw=true",
                        @"https://github.com/yyued/SVGA-Samples/blob/master/mutiMatte.svga?raw=true",
                        ];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [parser parseWithURL:[NSURL URLWithString:items[arc4random() % items.count]]
-         completionBlock:^(SVGAVideoEntity * _Nullable videoItem) {
-             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-             if (videoItem != nil) {
-                 self.aPlayer.videoItem = videoItem;
-                 [self.aPlayer startAnimation];
-             }
-         } failureBlock:nil];
-//        [parser parseWithNamed:@"Goddess" inBundle:nil completionBlock:^(SVGAVideoEntity * _Nonnull videoItem) {
-//            if (videoItem != nil) {
-//                self.aPlayer.videoItem = videoItem;
-//                [self.aPlayer startAnimation];
-//            }
-//        } failureBlock:nil];
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+//    [parser parseWithURL:[NSURL URLWithString:items[arc4random() % items.count]]
+//         completionBlock:^(SVGAVideoEntity * _Nullable videoItem) {
+//             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//             if (videoItem != nil) {
+//                 self.aPlayer.videoItem = videoItem;
+//                 [self.aPlayer startAnimation];
+//             }
+//         } failureBlock:nil];
+        [parser parseWithNamed:@"heheda" inBundle:nil completionBlock:^(SVGAVideoEntity * _Nonnull videoItem) {
+            if (videoItem != nil) {
+                self.aPlayer.videoItem = videoItem;
+                [self.aPlayer startAnimation];
+            }
+        } failureBlock:nil];
 }
 
 
