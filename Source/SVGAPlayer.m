@@ -32,17 +32,34 @@
 @property (nonatomic, assign) BOOL forwardAnimating;
 @property (nonatomic, assign) BOOL reversing;
 
-@end
+@end 
 
 @implementation SVGAPlayer
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.contentMode = UIViewContentModeTop;
+- (instancetype)init {
+    if (self = [super init]) {
+        [self initPlayer];
     }
     return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self initPlayer];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [self initPlayer];
+    }
+    return self;
+}
+
+- (void)initPlayer {
+    self.contentMode = UIViewContentModeTop;
+    self.clearsAfterStop = YES;
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
@@ -56,17 +73,35 @@
     if (self.videoItem == nil) {
         NSLog(@"videoItem could not be nil！");
         return;
+    } else if (self.drawLayer == nil) {
+        self.videoItem = _videoItem;
     }
     [self stopAnimation:NO];
     self.loopCount = 0;
+    if (self.videoItem.FPS == 0) {
+        NSLog(@"videoItem FPS could not be 0！");
+        return;
+    }
     self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(next)];
-
     self.displayLink.frameInterval = 60 / self.videoItem.FPS;
-    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:self.mainRunLoopMode];
     self.forwardAnimating = !self.reversing;
 }
 
 - (void)startAnimationWithRange:(NSRange)range reverse:(BOOL)reverse {
+    if (self.videoItem == nil) {
+        NSLog(@"videoItem could not be nil！");
+        return;
+    } else if (self.drawLayer == nil) {
+        self.videoItem = _videoItem;
+    }
+    [self stopAnimation:NO];
+    self.loopCount = 0;
+    if (self.videoItem.FPS == 0) {
+        NSLog(@"videoItem FPS could not be 0！");
+        return;
+    }
+    
     self.currentRange = range;
     self.reversing = reverse;
     if (reverse) {
@@ -75,7 +110,10 @@
     else {
         self.currentFrame = MAX(0, range.location);
     }
-    [self startAnimation];
+    self.forwardAnimating = !self.reversing;
+    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(next)];
+    self.displayLink.frameInterval = 60 / self.videoItem.FPS;
+    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:self.mainRunLoopMode];
 }
 
 - (void)pauseAnimation {
@@ -99,17 +137,27 @@
 }
 
 - (void)clear {
-    _contentLayers = nil;
+    self.contentLayers = nil;
     [self.drawLayer removeFromSuperlayer];
+    self.drawLayer = nil;
 }
 
 - (void)clearAudios {
     for (SVGAAudioLayer *layer in self.audioLayers) {
-        [layer.audioPlayer stop];
+        if (layer.audioPlaying) {
+            [layer.audioPlayer stop];
+            layer.audioPlaying = NO;
+        }
     }
 }
 
 - (void)stepToFrame:(NSInteger)frame andPlay:(BOOL)andPlay {
+    if (self.videoItem == nil) {
+        NSLog(@"videoItem could not be nil！");
+        return;
+    } else if (self.drawLayer == nil) {
+        self.videoItem = _videoItem;
+    }
     if (frame >= self.videoItem.frames || frame < 0) {
         return;
     }
@@ -117,9 +165,14 @@
     self.currentFrame = frame;
     [self update];
     if (andPlay) {
+        self.forwardAnimating = YES;
+        if (self.videoItem.FPS == 0) {
+            NSLog(@"videoItem FPS could not be 0！");
+            return;
+        }
         self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(next)];
         self.displayLink.frameInterval = 60 / self.videoItem.FPS;
-        [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+        [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:self.mainRunLoopMode];
     }
 }
 
@@ -170,13 +223,17 @@
         if (sprite.imageKey != nil) {
             if (self.dynamicTexts[sprite.imageKey] != nil) {
                 NSAttributedString *text = self.dynamicTexts[sprite.imageKey];
-                CGSize size = [text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:NULL].size;
+                CGSize bitmapSize = CGSizeMake(self.videoItem.images[sprite.imageKey].size.width * self.videoItem.images[sprite.imageKey].scale, self.videoItem.images[sprite.imageKey].size.height * self.videoItem.images[sprite.imageKey].scale);
+                CGSize size = [text boundingRectWithSize:bitmapSize
+                                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                                 context:NULL].size;
                 CATextLayer *textLayer = [CATextLayer layer];
                 textLayer.contentsScale = [[UIScreen mainScreen] scale];
                 [textLayer setString:self.dynamicTexts[sprite.imageKey]];
                 textLayer.frame = CGRectMake(0, 0, size.width, size.height);
                 [contentLayer addSublayer:textLayer];
                 contentLayer.textLayer = textLayer;
+                [contentLayer resetTextLayerProperties:text];
             }
             if (self.dynamicHiddens[sprite.imageKey] != nil &&
                 [self.dynamicHiddens[sprite.imageKey] boolValue] == YES) {
@@ -187,7 +244,7 @@
             }
         }
     }];
-    _contentLayers = tempContentLayers;
+    self.contentLayers = tempContentLayers;
     
     [self.layer addSublayer:self.drawLayer];
     NSMutableArray *audioLayers = [NSMutableArray array];
@@ -280,7 +337,7 @@
 
 - (void)update {
     [CATransaction setDisableActions:YES];
-    for (SVGAContentLayer *layer in _contentLayers) {
+    for (SVGAContentLayer *layer in self.contentLayers) {
         if ([layer isKindOfClass:[SVGAContentLayer class]]) {
             [layer stepToFrame:self.currentFrame];
         }
@@ -288,12 +345,14 @@
     [CATransaction setDisableActions:NO];
     if (self.forwardAnimating && self.audioLayers.count > 0) {
         for (SVGAAudioLayer *layer in self.audioLayers) {
-            if (layer.audioItem.startFrame == self.currentFrame) {
+            if (!layer.audioPlaying && layer.audioItem.startFrame <= self.currentFrame && self.currentFrame <= layer.audioItem.endFrame) {
                 [layer.audioPlayer setCurrentTime:(NSTimeInterval)(layer.audioItem.startTime / 1000)];
                 [layer.audioPlayer play];
+                layer.audioPlaying = YES;
             }
-            else if (layer.audioItem.endFrame <= self.currentFrame) {
+            if (layer.audioPlaying && layer.audioItem.endFrame <= self.currentFrame) {
                 [layer.audioPlayer stop];
+                layer.audioPlaying = NO;
             }
         }
     }
@@ -344,6 +403,7 @@
     _currentRange = NSMakeRange(0, videoItem.frames);
     _reversing = NO;
     _currentFrame = 0;
+    _loopCount = 0;
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self clear];
         [self draw];
@@ -359,8 +419,8 @@
     NSMutableDictionary *mutableDynamicObjects = [self.dynamicObjects mutableCopy];
     [mutableDynamicObjects setObject:image forKey:aKey];
     self.dynamicObjects = mutableDynamicObjects;
-    if (_contentLayers.count > 0) {
-        for (SVGAContentLayer *layer in _contentLayers) {
+    if (self.contentLayers.count > 0) {
+        for (SVGAContentLayer *layer in self.contentLayers) {
             if ([layer isKindOfClass:[SVGAContentLayer class]] && [layer.imageKey isEqualToString:aKey]) {
                 layer.bitmapLayer.contents = (__bridge id _Nullable)([image CGImage]);
             }
@@ -392,16 +452,19 @@
     NSMutableDictionary *mutableDynamicTexts = [self.dynamicTexts mutableCopy];
     [mutableDynamicTexts setObject:attributedText forKey:aKey];
     self.dynamicTexts = mutableDynamicTexts;
-    if (_contentLayers.count > 0) {
-        CGSize size = [attributedText boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:NULL].size;
+    if (self.contentLayers.count > 0) {
+        CGSize bitmapSize = CGSizeMake(self.videoItem.images[aKey].size.width * self.videoItem.images[aKey].scale, self.videoItem.images[aKey].size.height * self.videoItem.images[aKey].scale);
+        CGSize size = [attributedText boundingRectWithSize:bitmapSize
+                                                   options:NSStringDrawingUsesLineFragmentOrigin context:NULL].size;
         CATextLayer *textLayer;
-        for (SVGAContentLayer *layer in _contentLayers) {
+        for (SVGAContentLayer *layer in self.contentLayers) {
             if ([layer isKindOfClass:[SVGAContentLayer class]] && [layer.imageKey isEqualToString:aKey]) {
                 textLayer = layer.textLayer;
                 if (textLayer == nil) {
                     textLayer = [CATextLayer layer];
                     [layer addSublayer:textLayer];
                     layer.textLayer = textLayer;
+                    [layer resetTextLayerProperties:attributedText];
                 }
             }
         }
@@ -417,8 +480,8 @@
     NSMutableDictionary *mutableDynamicDrawings = [self.dynamicDrawings mutableCopy];
     [mutableDynamicDrawings setObject:drawingBlock forKey:aKey];
     self.dynamicDrawings = mutableDynamicDrawings;
-    if (_contentLayers.count > 0) {
-        for (SVGAContentLayer *layer in _contentLayers) {
+    if (self.contentLayers.count > 0) {
+        for (SVGAContentLayer *layer in self.contentLayers) {
             if ([layer isKindOfClass:[SVGAContentLayer class]] &&
                 [layer.imageKey isEqualToString:aKey]) {
                 layer.dynamicDrawingBlock = drawingBlock;
@@ -431,8 +494,8 @@
     NSMutableDictionary *mutableDynamicHiddens = [self.dynamicHiddens mutableCopy];
     [mutableDynamicHiddens setObject:@(hidden) forKey:aKey];
     self.dynamicHiddens = mutableDynamicHiddens;
-    if (_contentLayers.count > 0) {
-        for (SVGAContentLayer *layer in _contentLayers) {
+    if (self.contentLayers.count > 0) {
+        for (SVGAContentLayer *layer in self.contentLayers) {
             if ([layer isKindOfClass:[SVGAContentLayer class]] &&
                 [layer.imageKey isEqualToString:aKey]) {
                 layer.dynamicHidden = hidden;
@@ -474,6 +537,13 @@
         _dynamicDrawings = @{};
     }
     return _dynamicDrawings;
+}
+
+- (NSRunLoopMode)mainRunLoopMode {
+    if (!_mainRunLoopMode) {
+        _mainRunLoopMode = NSRunLoopCommonModes;
+    }
+    return _mainRunLoopMode;
 }
 
 @end

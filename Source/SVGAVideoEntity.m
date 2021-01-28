@@ -13,6 +13,8 @@
 #import "SVGAAudioEntity.h"
 #import "Svga.pbobjc.h"
 
+#define MP3_MAGIC_NUMBER "ID3"
+
 @interface SVGAVideoEntity ()
 
 @property (nonatomic, assign) CGSize videoSize;
@@ -29,12 +31,21 @@
 @implementation SVGAVideoEntity
 
 static NSCache *videoCache;
+static NSMapTable * weakCache;
+static dispatch_semaphore_t videoSemaphore;
 
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         videoCache = [[NSCache alloc] init];
-        videoCache.countLimit = 1;
+
+//        videoCache.countLimit = 1;
+
+        weakCache = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory
+        valueOptions:NSPointerFunctionsWeakMemory
+            capacity:64];
+        videoSemaphore = dispatch_semaphore_create(1);
+
     });
 }
 
@@ -82,7 +93,8 @@ static NSCache *videoCache;
             [JSONImages enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
                 if ([obj isKindOfClass:[NSString class]]) {
                     NSString *filePath = [self.cacheDir stringByAppendingFormat:@"/%@.png", obj];
-                    NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+//                    NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+                    NSData *imageData = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:NULL];
                     if (imageData != nil) {
                         UIImage *image = [[UIImage alloc] initWithData:imageData scale:2.0];
                         if (image != nil) {
@@ -132,6 +144,14 @@ static NSCache *videoCache;
     }
 }
 
++ (BOOL)isMP3Data:(NSData *)data {
+    BOOL result = NO;
+    if (!strncmp([data bytes], MP3_MAGIC_NUMBER, strlen(MP3_MAGIC_NUMBER))) {
+        result = YES;
+    }
+    return result;
+}
+
 - (void)resetImagesWithProtoObject:(SVGAProtoMovieEntity *)protoObject {
     NSMutableDictionary<NSString *, UIImage *> *images = [[NSMutableDictionary alloc] init];
     NSMutableDictionary<NSString *, NSData *> *audiosData = [[NSMutableDictionary alloc] init];
@@ -144,7 +164,8 @@ static NSCache *videoCache;
                 filePath = [self.cacheDir stringByAppendingFormat:@"/%@", fileName];
             }
             if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-                NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+//                NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+                NSData *imageData = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:NULL];
                 if (imageData != nil) {
                     UIImage *image = [[UIImage alloc] initWithData:imageData scale:2.0];
                     if (image != nil) {
@@ -154,9 +175,7 @@ static NSCache *videoCache;
             }
         }
         else if ([protoImages[key] isKindOfClass:[NSData class]]) {
-            NSData *fileTag = [protoImages[key] subdataWithRange:NSMakeRange(0, 4)];
-            NSString *fileTagDes = [fileTag description];
-            if (![fileTagDes containsString:@"89504e47"]) {
+            if ([SVGAVideoEntity isMP3Data:protoImages[key]]) {
                 // mp3
                 [audiosData setObject:protoImages[key] forKey:key];
             } else {
@@ -196,11 +215,26 @@ static NSCache *videoCache;
 }
 
 + (SVGAVideoEntity *)readCache:(NSString *)cacheKey {
-    return [videoCache objectForKey:cacheKey];
+    dispatch_semaphore_wait(videoSemaphore, DISPATCH_TIME_FOREVER);
+    SVGAVideoEntity * object = [videoCache objectForKey:cacheKey];
+    if (!object) {
+        object = [weakCache objectForKey:cacheKey];
+    }
+    dispatch_semaphore_signal(videoSemaphore);
+
+    return  object;
 }
 
 - (void)saveCache:(NSString *)cacheKey {
+    dispatch_semaphore_wait(videoSemaphore, DISPATCH_TIME_FOREVER);
     [videoCache setObject:self forKey:cacheKey];
+    dispatch_semaphore_signal(videoSemaphore);
+}
+
+- (void)saveWeakCache:(NSString *)cacheKey {
+    dispatch_semaphore_wait(videoSemaphore, DISPATCH_TIME_FOREVER);
+    [weakCache setObject:self forKey:cacheKey];
+    dispatch_semaphore_signal(videoSemaphore);
 }
 
 @end

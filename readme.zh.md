@@ -1,8 +1,17 @@
 # SVGAPlayer
 
-## 2.3.4 版本
+## 2.5.0 版本
 
-该版本修正了 SVGAPlayer 无法在 iOS13 上解析的问题，请尽快升级。
+该版本增加了对遮罩图层和遮罩图片动态替换的支持。<br>
+请参阅此处 [Dynamic · Matte Layer](https://github.com/yyued/SVGAPlayer-iOS/wiki/Dynamic-%C2%B7-Matte-Layer)
+
+该版本增加了对音频进度切换的支持。
+
+## 2.3.5 版本
+
+该版本修正了 SVGAPlayer `clearsAfterStop 默认值为 YES`，请检查代码，修正不需要 clear 的 SVGAPlayer。
+
+该版本修正了 SVGAPlayer 无法在 iOS 13.1 上播放异常的问题，请尽快升级。
 
 ## 介绍
 
