@@ -17,10 +17,12 @@
 		345DB8AD2338EAE800CF8191 /* hunli1.svga in Resources */ = {isa = PBXBuildFile; fileRef = 345DB8AB2338EAE800CF8191 /* hunli1.svga */; };
 		345DB8AE2338EAE800CF8191 /* hunli2.svga in Resources */ = {isa = PBXBuildFile; fileRef = 345DB8AC2338EAE800CF8191 /* hunli2.svga */; };
 		349D138E22A541C300DE6542 /* plane_new.svga in Resources */ = {isa = PBXBuildFile; fileRef = 349D138D22A541C300DE6542 /* plane_new.svga */; };
+		34A959D825C2951000003E8C /* BitmapColorArea.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34A959D725C2950F00003E8C /* BitmapColorArea.svga */; };
 		34B17EE3230D2C4700FBCD13 /* PK_start1.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34B17EE2230D2C4700FBCD13 /* PK_start1.svga */; };
 		34B17EE9230E312000FBCD13 /* hehe.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34B17EE8230E312000FBCD13 /* hehe.svga */; };
 		34B17EEB230E7AA800FBCD13 /* live_pk_start.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34B17EEA230E7AA800FBCD13 /* live_pk_start.svga */; };
 		34CEF693228D4CAD0016F6C6 /* D1B203C1E14ABEDA81C62FC9BBDCE3D9.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34CEF692228D4CAD0016F6C6 /* D1B203C1E14ABEDA81C62FC9BBDCE3D9.svga */; };
+		34D71CFE256211CE00D3C839 /* 202010301540185175660807220252920.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34D71CFD256211CE00D3C839 /* 202010301540185175660807220252920.svga */; };
 		4B62B1C5E6CE2BE2D914927B /* libPods-SVGAPlayer React.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92332F7A897BF4379D765B05 /* libPods-SVGAPlayer React.a */; };
 		63712E6521787950001AE014 /* heartbeat.svga in Resources */ = {isa = PBXBuildFile; fileRef = 63712E6421787950001AE014 /* heartbeat.svga */; };
 		63712E6821787A45001AE014 /* SVGAAudioEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 63712E6721787A45001AE014 /* SVGAAudioEntity.m */; };
@@ -86,10 +88,12 @@
 		345DB8AB2338EAE800CF8191 /* hunli1.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = hunli1.svga; sourceTree = "<group>"; };
 		345DB8AC2338EAE800CF8191 /* hunli2.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = hunli2.svga; sourceTree = "<group>"; };
 		349D138D22A541C300DE6542 /* plane_new.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = plane_new.svga; sourceTree = "<group>"; };
+		34A959D725C2950F00003E8C /* BitmapColorArea.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = BitmapColorArea.svga; sourceTree = "<group>"; };
 		34B17EE2230D2C4700FBCD13 /* PK_start1.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = PK_start1.svga; sourceTree = "<group>"; };
 		34B17EE8230E312000FBCD13 /* hehe.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = hehe.svga; sourceTree = "<group>"; };
 		34B17EEA230E7AA800FBCD13 /* live_pk_start.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = live_pk_start.svga; sourceTree = "<group>"; };
 		34CEF692228D4CAD0016F6C6 /* D1B203C1E14ABEDA81C62FC9BBDCE3D9.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = D1B203C1E14ABEDA81C62FC9BBDCE3D9.svga; sourceTree = "<group>"; };
+		34D71CFD256211CE00D3C839 /* 202010301540185175660807220252920.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = 202010301540185175660807220252920.svga; sourceTree = "<group>"; };
 		63712E6421787950001AE014 /* heartbeat.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = heartbeat.svga; sourceTree = "<group>"; };
 		63712E6621787A45001AE014 /* SVGAAudioEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVGAAudioEntity.h; sourceTree = "<group>"; };
 		63712E6721787A45001AE014 /* SVGAAudioEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SVGAAudioEntity.m; sourceTree = "<group>"; };
@@ -275,6 +279,8 @@
 		90D7C9FA1F7E2AA3006E74F0 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				34A959D725C2950F00003E8C /* BitmapColorArea.svga */,
+				34D71CFD256211CE00D3C839 /* 202010301540185175660807220252920.svga */,
 				3410B8CE233A07680042ABB1 /* heheda.svga */,
 				345DB8AB2338EAE800CF8191 /* hunli1.svga */,
 				345DB8AC2338EAE800CF8191 /* hunli2.svga */,
@@ -414,6 +420,7 @@
 				344D99B22303B67C00712349 /* answer_pk_animation2.svga in Resources */,
 				345DB8AA2338DB6A00CF8191 /* hunli.svga in Resources */,
 				63712E6521787950001AE014 /* heartbeat.svga in Resources */,
+				34D71CFE256211CE00D3C839 /* 202010301540185175660807220252920.svga in Resources */,
 				90A676EB1D13A6DF008A69F3 /* Main.storyboard in Resources */,
 				344D99AF2303B67C00712349 /* answer_pk_win.svga in Resources */,
 				90CB64F91EF297E800DAA382 /* SVGAPlayer React-Info.plist in Resources */,
@@ -426,6 +433,7 @@
 				71A8679322B7853600176CD6 /* matteBitmap.svga in Resources */,
 				90D7CA1C1F7FB114006E74F0 /* rose_1.5.0.svga in Resources */,
 				90D7CA1B1F7FB114006E74F0 /* rose_2.0.0.svga in Resources */,
+				34A959D825C2951000003E8C /* BitmapColorArea.svga in Resources */,
 				3410B8CF233A07680042ABB1 /* heheda.svga in Resources */,
 				71A8679B22B8CF7400176CD6 /* Goddess.svga in Resources */,
 			);

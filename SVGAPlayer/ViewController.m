@@ -60,7 +60,7 @@ static SVGAParser *parser;
 //                 [self.aPlayer startAnimation];
 //             }
 //         } failureBlock:nil];
-        [parser parseWithNamed:@"heheda" inBundle:nil completionBlock:^(SVGAVideoEntity * _Nonnull videoItem) {
+        [parser parseWithNamed:@"202010301540185175660807220252920" inBundle:nil completionBlock:^(SVGAVideoEntity * _Nonnull videoItem) {
             if (videoItem != nil) {
                 self.aPlayer.videoItem = videoItem;
                 [self.aPlayer startAnimation];
