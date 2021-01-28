@@ -56,12 +56,28 @@ static SVGAParser *parser;
                        @"https://github.com/yyued/SVGA-Samples/blob/master/rose.svga?raw=true",
                        ];
 
-//    [parser parseWithNamed:@"202010301540185175660807220252920" inBundle:nil completionBlock:^(SVGAVideoEntity * _Nonnull videoItem) {
+//    [parser parseWithNamed:@"EmptyState" inBundle:nil completionBlock:^(SVGAVideoEntity * _Nonnull videoItem) {
 //        if (videoItem != nil) {
 //            self.aPlayer.videoItem = videoItem;
+//            NSMutableParagraphStyle *para = [[NSMutableParagraphStyle alloc] init];
+//            [para setLineBreakMode:NSLineBreakByTruncatingTail];
+//            [para setAlignment:NSTextAlignmentCenter];
+//            NSAttributedString *str = [[NSAttributedString alloc]
+//                                       initWithString:@"Hello, World! Hello, World!"
+//                                       attributes:@{
+//                                           NSFontAttributeName: [UIFont systemFontOfSize:28],
+//                                           NSForegroundColorAttributeName: [UIColor whiteColor],
+//                                           NSParagraphStyleAttributeName: para,
+//                                       }];
+//            [self.aPlayer setAttributedText:str forKey:@"banner"];
+//
 //            [self.aPlayer startAnimation];
+//
+////                 [self.aPlayer startAnimationWithRange:NSMakeRange(10, 25) reverse:YES];
 //        }
 //    } failureBlock:nil];
+    
+    return;
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 //    parser.enabledMemoryCache = YES;
@@ -86,7 +102,9 @@ static SVGAParser *parser;
                  
 //                 [self.aPlayer startAnimationWithRange:NSMakeRange(10, 25) reverse:YES];
              }
-         } failureBlock:nil];
+    } failureBlock:^(NSError * _Nullable error) {
+        
+    }];
 //
 //        [parser parseWithURL:[NSURL URLWithString:@"https://github.com/svga/SVGA-Samples/raw/master_aep/BitmapColorArea1.svga"] completionBlock:^(SVGAVideoEntity * _Nullable videoItem) {
 //            if (videoItem != nil) {
