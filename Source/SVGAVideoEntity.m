@@ -39,7 +39,7 @@ static dispatch_semaphore_t videoSemaphore;
     dispatch_once(&onceToken, ^{
         videoCache = [[NSCache alloc] init];
 
-        videoCache.countLimit = 1;
+//        videoCache.countLimit = 1;
 
         weakCache = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsStrongMemory
         valueOptions:NSPointerFunctionsWeakMemory

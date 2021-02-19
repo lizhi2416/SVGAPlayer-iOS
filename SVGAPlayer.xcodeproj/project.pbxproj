@@ -20,6 +20,9 @@
 		34A959D825C2951000003E8C /* BitmapColorArea.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34A959D725C2950F00003E8C /* BitmapColorArea.svga */; };
 		34A959E625C29DE600003E8C /* posche.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34A959E525C29DE600003E8C /* posche.svga */; };
 		34A959EA25C29E5F00003E8C /* EmptyState.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34A959E925C29E5F00003E8C /* EmptyState.svga */; };
+		34A95A5425C39CBE00003E8C /* letter.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34A95A5325C39CBE00003E8C /* letter.svga */; };
+		34AF57C625CA8EFC00A2E975 /* 信封3key.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34AF57C525CA8EFC00A2E975 /* 信封3key.svga */; };
+		34AF57CC25CAB97D00A2E975 /* 19粉色.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34AF57CB25CAB97D00A2E975 /* 19粉色.svga */; };
 		34B17EE3230D2C4700FBCD13 /* PK_start1.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34B17EE2230D2C4700FBCD13 /* PK_start1.svga */; };
 		34B17EE9230E312000FBCD13 /* hehe.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34B17EE8230E312000FBCD13 /* hehe.svga */; };
 		34B17EEB230E7AA800FBCD13 /* live_pk_start.svga in Resources */ = {isa = PBXBuildFile; fileRef = 34B17EEA230E7AA800FBCD13 /* live_pk_start.svga */; };
@@ -95,6 +98,9 @@
 		34A959D725C2950F00003E8C /* BitmapColorArea.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = BitmapColorArea.svga; sourceTree = "<group>"; };
 		34A959E525C29DE600003E8C /* posche.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = posche.svga; sourceTree = "<group>"; };
 		34A959E925C29E5F00003E8C /* EmptyState.svga */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EmptyState.svga; sourceTree = "<group>"; };
+		34A95A5325C39CBE00003E8C /* letter.svga */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = letter.svga; sourceTree = "<group>"; };
+		34AF57C525CA8EFC00A2E975 /* 信封3key.svga */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "信封3key.svga"; sourceTree = "<group>"; };
+		34AF57CB25CAB97D00A2E975 /* 19粉色.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = "19粉色.svga"; sourceTree = "<group>"; };
 		34B17EE2230D2C4700FBCD13 /* PK_start1.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = PK_start1.svga; sourceTree = "<group>"; };
 		34B17EE8230E312000FBCD13 /* hehe.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = hehe.svga; sourceTree = "<group>"; };
 		34B17EEA230E7AA800FBCD13 /* live_pk_start.svga */ = {isa = PBXFileReference; lastKnownFileType = file; path = live_pk_start.svga; sourceTree = "<group>"; };
@@ -287,6 +293,9 @@
 		90D7C9FA1F7E2AA3006E74F0 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				34AF57CB25CAB97D00A2E975 /* 19粉色.svga */,
+				34AF57C525CA8EFC00A2E975 /* 信封3key.svga */,
+				34A95A5325C39CBE00003E8C /* letter.svga */,
 				34A959E925C29E5F00003E8C /* EmptyState.svga */,
 				34A959E525C29DE600003E8C /* posche.svga */,
 				34A959D725C2950F00003E8C /* BitmapColorArea.svga */,
@@ -424,6 +433,7 @@
 				34B17EE3230D2C4700FBCD13 /* PK_start1.svga in Resources */,
 				34B17EE9230E312000FBCD13 /* hehe.svga in Resources */,
 				71418C93225E6F710029C69E /* mutiMatte.svga in Resources */,
+				34AF57CC25CAB97D00A2E975 /* 19粉色.svga in Resources */,
 				90A676F01D13A6DF008A69F3 /* LaunchScreen.storyboard in Resources */,
 				718A146D235718E000FED5D3 /* Rocket.svga in Resources */,
 				90A676ED1D13A6DF008A69F3 /* Assets.xcassets in Resources */,
@@ -434,7 +444,9 @@
 				34A959E625C29DE600003E8C /* posche.svga in Resources */,
 				345DB8AA2338DB6A00CF8191 /* hunli.svga in Resources */,
 				63712E6521787950001AE014 /* heartbeat.svga in Resources */,
+				34AF57C625CA8EFC00A2E975 /* 信封3key.svga in Resources */,
 				34D71CFE256211CE00D3C839 /* 202010301540185175660807220252920.svga in Resources */,
+				34A95A5425C39CBE00003E8C /* letter.svga in Resources */,
 				90A676EB1D13A6DF008A69F3 /* Main.storyboard in Resources */,
 				344D99AF2303B67C00712349 /* answer_pk_win.svga in Resources */,
 				90CB64F91EF297E800DAA382 /* SVGAPlayer React-Info.plist in Resources */,
